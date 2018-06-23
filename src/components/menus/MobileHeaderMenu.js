@@ -135,8 +135,8 @@ class MobileHeaderMenu extends Component {
                   <MenuLink to="/">Home</MenuLink>
                   <MenuLink to="#">Classes</MenuLink>
                   <MenuLink to="#">Events</MenuLink>
-                  <MenuLink to="#">Tools</MenuLink>
-                  <MenuLink to="/tools">Contact</MenuLink>
+                  <MenuLink to="/tools">Tools</MenuLink>
+                  <MenuLink to="#">Contact</MenuLink>
                   <SignUpButton to="/get-started">Get Started</SignUpButton>
                 </div>
               </div>
