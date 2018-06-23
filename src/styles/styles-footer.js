@@ -17,7 +17,7 @@ export const MainFooter = styled.div`
 
   @media (max-width: 767px) {
     display: flex;
-    flex-direction: column-reverse;
+    flex-direction: column;
     padding: 50px 32px 0;
   }
 `;

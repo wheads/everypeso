@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'gatsby'
 import { FooterContainer, MainFooter, SubFooter, Logo, FooterSection, FooterSectionTitle  } from '../../styles/styles-footer'
+import { HideOnMobile, HideOnTabletAndDesktop } from '../../styles/styles-responsive'
 import logo from './img-everypeso-logo-new-gray.svg'
 import facebook from './img-facebook.svg'
 import twitter from './img-twitter.svg'
@@ -50,13 +51,25 @@ const Footer = ({ siteTitle }) => (
           <MenuLink to="#">Privacy Policy</MenuLink>
           <MenuLink to="#">Terms of Use</MenuLink>
         </FooterSection>
-        <FooterSection>
-          <FooterSectionTitle>RESOURCES</FooterSectionTitle>
-          <MenuLink to="#">Classes</MenuLink>
-          <MenuLink to="#">Events</MenuLink>
-          <MenuLink to="/tools">Tools</MenuLink>
-        </FooterSection>
+        <HideOnMobile>
+          <FooterSection>
+            <FooterSectionTitle>RESOURCES</FooterSectionTitle>
+            <MenuLink to="#">Classes</MenuLink>
+            <MenuLink to="#">Events</MenuLink>
+            <MenuLink to="/tools">Tools</MenuLink>
+          </FooterSection>
+        </HideOnMobile>  
       </SubFooter>
+      <HideOnTabletAndDesktop>
+        <SubFooter>
+          <FooterSection>
+            <FooterSectionTitle>RESOURCES</FooterSectionTitle>
+            <MenuLink to="#">Classes</MenuLink>
+            <MenuLink to="#">Events</MenuLink>
+            <MenuLink to="/tools">Tools</MenuLink>
+          </FooterSection>
+        </SubFooter>
+      </HideOnTabletAndDesktop>    
     </MainFooter>  
   </FooterContainer>
 )
