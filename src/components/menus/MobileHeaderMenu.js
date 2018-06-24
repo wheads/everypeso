@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'gatsby'
 import styled from 'styled-components'
+import { disableBodyScroll, enableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock'
 import { Logo } from '../../styles/styles-header'
 import logo from './img-everypeso-logo-new.svg'
 
@@ -56,12 +57,21 @@ class MobileHeaderMenu extends Component {
       showMenu: false
     }
 
+    this.targetElement = null;
     this.showMenu = this.showMenu.bind(this);
     this.closeMenu = this.closeMenu.bind(this);
   }
 
+  componentDidMount() {
+    // Get a target element that you want to persist scrolling 
+    this.targetElement = document.querySelector('#mobile-menu');
+  }
+
   showMenu(event) {
     event.preventDefault();
+
+    // Disable body scroll
+    disableBodyScroll(this.targetElement);
 
     this.setState({ showMenu: true}, () => {
       document.addEventListener('click', this.closeMenu);
@@ -72,11 +82,18 @@ class MobileHeaderMenu extends Component {
 
     if (!this.dropdownMenu.contains(event.target)) {
 
+      // Re-enable body scroll
+      enableBodyScroll(this.targetElement);
+
       this.setState({ showMenu: false }, () => {
         document.removeEventListener('click', this.closeMenu);
       });
 
     }
+  }
+
+  componentWillUnmount() {
+    clearAllBodyScrollLocks();
   }
 
   render() {
@@ -98,7 +115,7 @@ class MobileHeaderMenu extends Component {
                   right:`0`,
                   backgroundColor:`#fff`,
                   zIndex:`999`
-                }}  
+                }} id="mobile-menu"
               >
                 <div
                   style={{
