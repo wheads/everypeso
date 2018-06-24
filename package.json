@@ -4,7 +4,6 @@
   "version": "1.0.0",
   "author": "EveryPeso <hello@everypeso.com>",
   "dependencies": {
-    "body-scroll-lock": "^2.4.6",
     "d3": "^5.5.0",
     "gatsby": "next",
     "gatsby-plugin-react-helmet": "next",
