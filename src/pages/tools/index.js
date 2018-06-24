@@ -114,7 +114,7 @@ const ToolsPage = () => (
             <SectionBody>
               <h3>Investment Quiz</h3>
               <p>Think you know investing? Take the short quiz to find out how much you know. Don't worry, we'll explain the correct answers to you after you take the quiz. Good luck!</p>
-              <SectionLink to="#">Start Quiz</SectionLink>
+              <SectionLink to="/tools/investment-quiz">Start Quiz</SectionLink>
             </SectionBody>  
           </SectionContent>
         </Section>

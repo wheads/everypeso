@@ -63,7 +63,7 @@ class MobileHeaderMenu extends Component {
   showMenu(event) {
     event.preventDefault();
 
-    this.setState({ showMenu: true}, () => {
+    this.setState({ showMenu: true }, () => {
       document.addEventListener('click', this.closeMenu);
     });
   }
