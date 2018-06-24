@@ -68,10 +68,10 @@ class MobileHeaderMenu extends Component {
   }
 
   showMenu(event) {
-    event.preventDefault();
-
     // Disable body scroll
     disableBodyScroll(this.targetElement);
+    
+    event.preventDefault();
 
     this.setState({ showMenu: true}, () => {
       document.addEventListener('click', this.closeMenu);
