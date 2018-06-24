@@ -12,7 +12,7 @@ const MenuLink = styled(Link)`
     color: #424242;
   }
 
-  @media (max-width: 767px) {
+  @media (max-width: 1023px) {
     margin: 0;
     padding: 8px 0;
     color: #0073b9;

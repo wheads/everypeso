@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'gatsby'
 import styled from 'styled-components'
-import { HideOnMobile, HideOnTabletAndDesktop } from '../../styles/styles-responsive'
+import { HideOnMobileAndTablet, HideOnDesktop } from '../../styles/styles-responsive'
 import MobileToolsMenu from './MobileToolsMenu';
 
 const MenuContainer = styled.div`
@@ -29,7 +29,7 @@ const MenuLink = styled(Link)`
 
 const ToolsMenu = () => (
   <MenuContainer>
-    <HideOnMobile>
+    <HideOnMobileAndTablet>
       <span style={{fontSize:`18px`,fontWeight:`bold`,textTransform:`uppercase`,color:`#b6bec2`,padding:`0 1.5rem`}}>Tools By Topic</span>
       <MenuLink to="#get-started">Get Started</MenuLink>
       <MenuLink to="#investing">Investing</MenuLink>
@@ -37,10 +37,10 @@ const ToolsMenu = () => (
       <MenuLink to="#">Budgeting</MenuLink>
       <MenuLink to="#">Retirement</MenuLink>
       <MenuLink to="#">Insurance</MenuLink>
-    </HideOnMobile>  
-    <HideOnTabletAndDesktop>
+    </HideOnMobileAndTablet>  
+    <HideOnDesktop>
       <MobileToolsMenu />
-    </HideOnTabletAndDesktop>
+    </HideOnDesktop>
   </MenuContainer>
 )
 
