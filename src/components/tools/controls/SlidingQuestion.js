@@ -71,7 +71,7 @@ const DetailedAnswer = styled.div`
   font-size: calc(0.5vw + 1vh + .5vmin);
   font-weight: 500;
   color: green;
-  xcolor: #004086;
+  color: #004086;
   display: block;
   text-align: left;
   display: none;
