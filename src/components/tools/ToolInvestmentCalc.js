@@ -218,7 +218,7 @@ class NumberInput extends React.Component {
 
 const HeroBanner = styled.div`
   padding: 50px;
-  background-color: #dff9fb;
+  background-color: #fffbce;
 
   @media (max-width: 768px) {
     padding: 20px;
@@ -246,7 +246,7 @@ const HeroBannerTitle = styled.h2`
 
 const BigButton = styled(Link)`
   display: block;
-  background-color: orange;
+  background-color: #146414;
   color: #fff;
   text-transform: uppercase;
   text-decoration: none;
@@ -260,6 +260,10 @@ const BigButton = styled(Link)`
 
   @media (max-width: 768px) {
     margin: 15px auto;
+  }
+
+  &:hover {
+    opacity: 0.9;
   }
 `;
 

@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { scaleBand, scaleLinear } from 'd3-scale'
+import d3e from 'd3';
 import { max } from 'd3-array'
-import { select } from 'd3-selection'
+import { select, event } from 'd3-selection'
 import { easeElastic } from 'd3-ease'
 import XAxis from './axis/XAxis'
 import YAxis from './axis/YAxis'
@@ -59,6 +60,7 @@ class BarChart extends Component {
 
             select(node)
                 .append('polygon')
+                .attr('id','polytip')
                 .attr('points', points)
                 .style('fill','#0a0a0a')
                 .style('stroke', '#333')
@@ -120,8 +122,9 @@ class BarChart extends Component {
         select(node)
             .selectAll('rect')
             .data(this.props.data.schedule.map(d => d.money))
-            .style('fill', '#9bcb52')
+            .style('fill', '#9AE48B')
             .style('cursor','pointer')
+            .style('pointer-events','all')
             .attr('x', (d,i) => xScale(d))
             .attr('width', xScale.bandwidth())
             .transition()
@@ -137,13 +140,12 @@ class BarChart extends Component {
             .selectAll('rect')
             .data(this.props.data.schedule.map(d => d.money))
             .on('mouseover', function(d, i){
-
                 tooltip.transition()
                    .style('opacity', 1)
                 
                 showInfo(d, i);
 
-                select(this).style('fill', '#0073b9')
+                select(this).style('fill', '#00B9FF')
                 this.visible = 1;
             })
             .on('mousemove', function(d, i){                
@@ -158,7 +160,7 @@ class BarChart extends Component {
                 tooltip.transition()
                     .style('opacity', 0)
                 
-                select(this).style('fill', '#9bcb52')
+                select(this).style('fill', '#9AE48B')
                 this.visible = 0;
 
                 
