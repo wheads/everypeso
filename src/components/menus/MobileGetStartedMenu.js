@@ -64,7 +64,7 @@ class MobileGetStartedMenu extends Component {
                   position:`absolute`,
                   top:`45px`,
                   right:`0`,
-                  backgroundColor:`rgba(2,185,239)`,
+                  backgroundColor:`#146144`,
                   zIndex:`998`
                 }}  
               >

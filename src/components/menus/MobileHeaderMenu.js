@@ -6,7 +6,7 @@ import logo from './img-everypeso-logo-new.svg'
 
 const MenuLink = styled(Link)`
   margin-left: 24px;
-  font-size: 24px;
+  font-size: 20px;
   text-decoration: none;
   color: #69757a;
   border-bottom: 2px solid #f5f7f8;

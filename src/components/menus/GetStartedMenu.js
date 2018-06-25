@@ -5,7 +5,7 @@ import { HideOnMobile, HideOnTabletAndDesktop } from '../../styles/styles-respon
 import MobileGetStartedMenu from './MobileGetStartedMenu';
 
 const MenuContainer = styled.div`
-  background-color: rgba(2,185,239);
+  background-color: #146144;
   text-align: center;
   padding: 1.125rem 0;
   position: relative;

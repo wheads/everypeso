@@ -53,8 +53,8 @@ class MobileToolsMenu extends Component {
   render() {
     return (
       <div>
-        <p style={{fontSize:`18px`,fontWeight:`bold`,textTransform:`uppercase`,color:`#b6bec2`,padding:`0 1.5rem`,marginBottom:`0`}} onClick={this.showMenu}>
-          Tools By Topic &darr;
+        <p style={{fontSize:`18px`,color:`#b6bec2`,padding:`0 1.5rem`,marginBottom:`0`}} onClick={this.showMenu}>
+          Choose Tools By Topic &darr;
         </p>
         
         {
@@ -79,7 +79,6 @@ class MobileToolsMenu extends Component {
                     this.dropdownMenu = element;
                   }}
                 >
-                  <MenuLink to="#get-started">Get Started</MenuLink>
                   <MenuLink to="#investing">Investing</MenuLink>    
                   <MenuLink to="#">Budgeting</MenuLink>
                   <MenuLink to="#">Retirement</MenuLink>

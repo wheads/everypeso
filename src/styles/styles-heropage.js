@@ -10,7 +10,7 @@ export const HeroTitle = styled.h2`
   max-width: 1200px;
   margin: auto;
   color: #fff;
-  padding: 60px 100px;
+  padding: 130px 100px;
   font-size: 60px;
   text-align: center;
 `;

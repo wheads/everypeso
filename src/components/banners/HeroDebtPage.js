@@ -1,6 +1,6 @@
 import React from 'react'
 import { HeroContainer, HeroTitle } from '../../styles/styles-heropage'
-import bannerImg from './img-hero-banner-debt.jpg'
+import bannerImg from './img-hero-banner-debt.jpeg'
 
 const HeroDebtPage = () => (
   <HeroContainer style={{backgroundImage:`url(` + bannerImg + `)`}}>

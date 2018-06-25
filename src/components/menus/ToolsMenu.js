@@ -9,6 +9,7 @@ const MenuContainer = styled.div`
   text-align: center;
   padding: 1.125rem 0;
   position: relative;
+  box-shadow: 0 0 14px rgba(0,0,0,.15);
   
   @media (max-width: 767px) {
     display: flex;
@@ -30,8 +31,7 @@ const MenuLink = styled(Link)`
 const ToolsMenu = () => (
   <MenuContainer>
     <HideOnMobileAndTablet>
-      <span style={{fontSize:`18px`,fontWeight:`bold`,textTransform:`uppercase`,color:`#b6bec2`,padding:`0 1.5rem`}}>Tools By Topic</span>
-      <MenuLink to="#get-started">Get Started</MenuLink>
+      <span style={{fontSize:`18px`,color:`#b6bec2`,padding:`0 1.5rem`}}>Choose Tools By Topic:</span>
       <MenuLink to="#investing">Investing</MenuLink>
       <MenuLink to="#">Debt</MenuLink>    
       <MenuLink to="#">Budgeting</MenuLink>
