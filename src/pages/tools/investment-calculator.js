@@ -126,7 +126,7 @@ class App extends React.Component {
    */
   componentDidMount() {
     this.updateDimensions();
-    window.addEventListener("resize", this.updateDimensions.bind(this));
+    document.addEventListener("resize", this.updateDimensions.bind(this));
   }
 
   /**
@@ -134,7 +134,7 @@ class App extends React.Component {
    */
   componentWillUnmount() {    
     this.updateDimensions();
-    window.removeEventListener("resize", this.updateDimensions.bind(this));
+    document.removeEventListener("resize", this.updateDimensions.bind(this));
   }
 
   onClick(investmentData)

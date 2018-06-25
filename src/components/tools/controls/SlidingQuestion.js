@@ -43,6 +43,7 @@ const QuestionDiv = styled.div`
 const Radio = styled.input`
   height: calc(0.5vw + 0.5vh + .5vmin);
   width: calc(0.5vw + 0.5vh + .5vmin);
+  cursor: pointer;
 
   @media (max-width: 768px) {
     height: calc(0.75vw + 0.75vh + .5vmin);

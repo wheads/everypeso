@@ -1,25 +1,24 @@
 import React, { Component } from 'react';
 import Link from 'gatsby-link';
 import styled from "styled-components";
-import checkImg from './controls/img-check.png';
-import crossImg from './controls/img-cross.png';
+import checkImg from './img-check.png';
 import SlidingQuestion from './controls/SlidingQuestion';
 import { select } from 'd3-selection'
 import { transition } from 'd3-transition'
 
+//DARK GREEN - 146414
+//LIGHT GREEN - 9AE48B
+//BLUE - 00B9FF
+//BEIGE - FFFBCE
+
 const HeroBanner = styled.div`
   padding: 50px;
-  background-color: #dff9fb;
+  background-color: #FFFFFF;
+  text-align: center;
 
   @media (max-width: 768px) {
     padding: 15px;
-    text-align: center;
   }
-`;
-
-const HeroBannerParag = styled.p`
-  font-size: 18px;
-  margin-bottom: 0px;
 `;
 
 const HeroBannerTitle = styled.h2`
@@ -27,7 +26,7 @@ const HeroBannerTitle = styled.h2`
   margin-bottom: 16px;
   padding-bottom: 0;
   border-bottom: none;
-  font-size: calc(3.5vw + 1.5vh + .5vmin);
+  font-size: 32px;
   color: #000;
 
   @media (max-width: 768px) {
@@ -37,7 +36,7 @@ const HeroBannerTitle = styled.h2`
 
 const HeroBannerSub = styled.h1`
   font-size: calc(1.25vw + 1.25vh + .5vmin);
-  color: #707070;
+  color: #0C0C0C;
   margin-bottom: calc(1.25vw + 1.25vh + .5vmin);
   font-weight: 400;
 
@@ -70,7 +69,7 @@ const BigButton = styled(Link)`
     max-width: 350px;
     padding: 10px 10px;
   }
-
+  
   &:hover {
     opacity: 0.9;
   }
@@ -94,6 +93,7 @@ const Button = styled(Link)`
 
   &:hover {
     opacity: 0.9;
+    background-color: red;
   }
 
   @media (max-width: 768px) {    
@@ -111,7 +111,7 @@ const Button = styled(Link)`
   }
 `;
 
-class ToolInvestmentQuiz extends Component {   
+class ToolInvestmentQuiz2 extends Component {   
   
   constructor(props) {
     super(props);
@@ -349,16 +349,16 @@ class ToolInvestmentQuiz extends Component {
   /**
    * Add event listener
    */
-  componentWillMount() {
-    this.updateDimensions();
-  }
+  //UNSAFE_componentWillMount() {
+  //  this.updateDimensions();
+  //}
 
   /**
    * Add event listener
    */
   componentDidMount() {
     this.updateDimensions();
-    window.addEventListener("resize", this.updateDimensions.bind(this));
+    document.addEventListener("resize", this.updateDimensions.bind(this));
   }
 
   /**
@@ -407,12 +407,10 @@ class ToolInvestmentQuiz extends Component {
 
   showButton(id){
     select(id).style('opacity','1');
-    select(id).style('pointer-events','auto');
   }
 
   hideButton(id){
     select(id).style('opacity','0');
-    select(id).style('pointer-events','none');
   }
 
   onOptionChange(e)
@@ -421,23 +419,16 @@ class ToolInvestmentQuiz extends Component {
     {
       this.enableButton("#btnNext");
 
-      if(this.state.index === 9 && this.state.status !== "done")
-        this.showButton("#btnShow");
     }
 
     return;
   }
 
-  ReviewQuiz(e)
+  ReviewQuiz()
   {
-    e.preventDefault();
     select("#divReviewQuiz").style('display','none');
     this.showButton("#btnNext");
     this.setState({index: 0, status: 'done'});
-    for(var i = 0; i < this.state.questions.length; i++)
-    {      
-      select("#detail" + this.state.questions[i].number).style('display','block');
-    }
   }
 
   StartQuiz(e)
@@ -468,7 +459,7 @@ class ToolInvestmentQuiz extends Component {
     select("#divContainer").style('left','0');
     select("#divReviewQuiz").style('display','table-cell');
     this.hideButton("#btnBack");
-    this.hideButton("#btnShow")
+    this.hideButton("#btnNext");
 
     var score = 0;
     for(var i = 0; i < this.state.questions.length; i++)
@@ -509,27 +500,28 @@ class ToolInvestmentQuiz extends Component {
         }
       }
       
+      select("#detail" + this.state.questions[i].number).style('display','block');
       if(correctOption !== null)
-        correctOption.checked = true;      
+        correctOption.checked = true;
+      this.setState({
+        yourScore: score
+      });
     }
-    this.setState({
-      yourScore: score
-    });
 
   }
 
   onKeyDown(e)
   {
     
-    if(e.keyCode == 39 && this.state.questions[this.state.index].answer !== "")
+    if(e.keyCode === 39 && this.state.questions[this.state.index].answer !== "")
     {
       this.MoveQuestions(e, "next");
     }
-    else if(e.keyCode == 37 && this.state.index !== 0)
+    else if(e.keyCode === 37 && this.state.index !== 0)
     {
       this.MoveQuestions(e, "back");
     }
-    else if((e.keyCode == 40 || e.keyCode == 38) && this.state.questions[this.state.index].answer == "")
+    else if((e.keyCode === 40 || e.keyCode === 38) && this.state.questions[this.state.index].answer === "")
     {
       this.disableButton("#btnNext");
     }
@@ -539,7 +531,7 @@ class ToolInvestmentQuiz extends Component {
   ShowAnswers(e)
   {
     e.preventDefault();
-    this.ShowAnswersDiv();
+    //this.ShowAnswersDiv();
   }
 
   MoveQuestions(e, direction)
@@ -548,11 +540,18 @@ class ToolInvestmentQuiz extends Component {
     
     var index = this.state.index;
     var loc = 0;
-    if(direction=="next" && this.state.index < this.state.questions.length)
+    if(direction==="next" && this.state.index < this.state.questions.length)
       index++;
     else if (this.state.index !== 0)
       index--;
     
+    console.log(index);
+    if(index === 10)
+    {
+      this.ShowAnswersDiv(e)
+      return;
+    }
+
     loc = 0 - (this.divSliding.props.Width * index);
     
     this.setState({
@@ -567,25 +566,32 @@ class ToolInvestmentQuiz extends Component {
           .duration(500)
           .delay(0));
 
-    (this.state.questions[index].answer == "") ? this.disableButton("#btnNext") : this.enableButton("#btnNext");
-    if(index == 0) {
+    (this.state.questions[index].answer === "") ? this.disableButton("#btnNext") : this.enableButton("#btnNext");
+    if(index === 0) {
       this.hideButton("#btnBack");
      }
      else{
       this.showButton("#btnBack");
       this.hideButton("#btnShow");
      } 
-    (index == 9) ? this.hideButton("#btnNext") : this.showButton("#btnNext");    
+    
+    (index === 0) ? this.hideButton("#btnNext") : this.showButton("#btnNext");
 
-    if(index === 9 && this.state.status !== "done" && this.state.questions[index].answer !== "")
-      this.showButton("#btnShow");
+    if(index === 9) 
+    {
+      select("#btnNext").style("background-color","#146414").html("Finish");
+    }
+    else
+    {
+      select("#btnNext").style("background-color","#146414").html("Next");
+    }
   }
 
   onClick(e)
   {    
     e.preventDefault();
     var unanswered = this.state.questions.filter(function (question) {
-      return question.answer.length == 0;});
+      return question.answer.length === 0;});
     
     if(unanswered.length > 0)
       {
@@ -599,19 +605,17 @@ class ToolInvestmentQuiz extends Component {
       var correctOption = null;
       for(var j = 0; j < this.state.questions[i].options.length; j++)
       {
-        //var option = document.getElementById('rd' + this.state.questions[i].number + this.state.questions[i].options[j].value);
-        //var img2 = document.getElementById('rdimg' + this.state.questions[i].number + this.state.questions[i].options[j].value);
          
         var option = select('#rd' + this.state.questions[i].number + this.state.questions[i].options[j].value);
         var img = select('#rdimg' + this.state.questions[i].number + this.state.questions[i].options[j].value);
         if(option !== undefined && img !== undefined)
         {         
           img.style('opacity', 0);
-          if(this.state.questions[i].expected == this.state.questions[i].answer)
+          if(this.state.questions[i].expected === this.state.questions[i].answer)
           {
             //if(option.value == this.state.questions[i].answer && option.checked)
-            if(this.state.questions[i].options[j].value == this.state.questions[i].answer 
-              && this.state.questions[i].options[j].selected == "true")
+            if(this.state.questions[i].options[j].value === this.state.questions[i].answer 
+              && this.state.questions[i].options[j].selected === "true")
             {
               score++;
               img.style('opacity', 1);
@@ -620,14 +624,14 @@ class ToolInvestmentQuiz extends Component {
           }
           else
           {
-            if(this.state.questions[i].options[j].value == this.state.questions[i].expected) 
+            if(this.state.questions[i].options[j].value === this.state.questions[i].expected) 
               //&& this.state.questions[i].options[j].selected == "")
             {
               correctOption = option;
               img.style('opacity', 1);
             }
-            if(this.state.questions[i].options[j].value == this.state.questions[i].answer 
-              && this.state.questions[i].options[j].selected == "true")
+            if(this.state.questions[i].options[j].value === this.state.questions[i].answer 
+              && this.state.questions[i].options[j].selected === "true")
             { 
               img.style('opacity', 1);
               //this.state.questions[i].options[j].selected = ""
@@ -636,7 +640,6 @@ class ToolInvestmentQuiz extends Component {
           }
         }
       }
-      //var detail = document.getElementById("detail" + this.state.questions[i].number).style.display = 'block';
       select("#detail" + this.state.questions[i].number).style('opacity','1');
       if(correctOption !== null)
         correctOption.checked = true;
@@ -649,42 +652,41 @@ class ToolInvestmentQuiz extends Component {
 
   render() {
     
-    const iframe = '<iframe src="https://www.youtube.com/embed/Jy6RufqwAoI?rel=0&amp;autoplay=1" width="540" height="450"></iframe>';
-
-    function iframeMe()
-    {
-      return {
-        __html: iframe//this.props.iframe
-      }
-    }
+    // function iframeMe()
+    //{
+    //  return {
+    //    __html: iframe//this.props.iframe
+    //  }
+    //}
 
     return (
         <HeroBanner>
           <HeroBannerTitle>Basic Investing Quiz</HeroBannerTitle>          
-          <div id="Container" ref={ (divMainContainer) => this.divMainContainer = divMainContainer} style={{width: '100%', margin: '0px', display: 'block', backgroundColor: 'white', boxShadow: 'darkslategrey 10px 10px 50px'}}>
+          <div id="Container" ref={ (divMainContainer) => this.divMainContainer = divMainContainer} style={{width: '100%', margin: '0px', display: 'block', backgroundColor: '#FFFBCE', boxShadow: 'darkslategrey 10px 10px 50px'}}>
             <div style={{position: 'relative', width: '100%', height: '100%'}}>
-            <div style={{display: 'block', width: '100%', height: '80%', backgroundColor: 'white', overflowY: 'auto', overflowX: 'hidden'}}>
+            <div style={{display: 'block', width: '100%', height: ' 80%', backgroundColor: '#FFFBCE', overflowY: 'auto', overflowX: 'hidden'}}>
               <div id="divContainer" ref={ (divContainer) => this.divContainer = divContainer} style={{position: 'relative', display: 'block'}} onKeyDown={(e) => this.onKeyDown(e)}>
                 {this.state.questions.map((question, index) =>
                   <SlidingQuestion ref={ (divSliding) => this.divSliding = divSliding} question={question} style={{display: 'block'}} index={index} onOptionChange={(e) => this.onOptionChange(e)}
                     Width={this.state.width} Next={(index<(this.state.questions.length-1))?"true":"false"} Back={(index>0)?"true":"false"} Location={this.state.containerX} />
                   )}
                 
-                <div id="divStartInfo" style={{display: 'table-cell', textAlign: 'center', position: 'absolute', left: '0px', top: '0px', height: '100%', width: '100%', backgroundColor: 'white'}}>
+                <div id="divStartInfo" style={{display: 'table-cell', textAlign: 'center', position: 'absolute', left: '0px', top: '0px', height: '100%', width: '100%', backgroundColor: '#FFFBCE'}}>
                   <HeroBannerSub style={{borderBottom: '1px solid', padding: 'calc(1.75vw + 1.75vh + .5vmin) 25px', textAlign: 'center'}}>How will do you know investing?  Take the short quiz below to find out.<br/>Explanations will be provided after completing the quiz.</HeroBannerSub>
                   <BigButton id="btnStart" style={{display: 'inline-block'}} ref={ (btnResults) => this.btnResults = btnResults} onClick={(e) => this.StartQuiz(e)}>Start</BigButton>
                 </div>
-                <div id="divReviewQuiz" style={{display: 'none', textAlign: 'center', position: 'absolute', left: '0px', top: '0px', height: '100%', width: '100%', backgroundColor: 'white'}}>
-                  <HeroBannerSub style={{borderBottom: '1px solid', padding: 'calc(1.75vw + 1.75vh + .5vmin) 25px', textAlign: 'center'}}>Congratulations!!!<br/><br/>You have scored {this.state.yourScore} out of the {this.state.questions.length} questions</HeroBannerSub>
-                  <BigButton id="btnReview" style={{display: 'inline-block'}} ref={ (btnResults) => this.btnResults = btnResults} onClick={(e) => this.ReviewQuiz(e)}>Review Answers</BigButton>
+                <div id="divReviewQuiz" style={{display: 'none', textAlign: 'center', position: 'absolute', left: '0px', top: '0px', height: '100%', width: '100%', backgroundColor: '#FFFBCE'}}>
+                  <HeroBannerSub style={{borderBottom: '1px solid', padding: 'calc(1.75vw + 1.75vh + .5vmin) 25px', textAlign: 'center'}}>Congratulations!!!<br/><br/>You have scored {this.state.yourScore} out of the {this.state.questions.length} questions</HeroBannerSub>                  
+                  <HeroBannerSub style={{padding: 'calc(1.75vw + 1.75vh + .5vmin) 25px', textAlign: 'center'}}>Please enter your email to review your results.</HeroBannerSub>
+                  {/*<BigButton id="btnReview" style={{display: 'inline-block'}} ref={ (btnResults) => this.btnResults = btnResults} onClick={(e) => this.ReviewQuiz(e)}>Review Answers</BigButton>*/}
                 </div>
               </div>
             </div> 
             <div style={{display: 'table', width: '100%', height: '20%', textAlign: 'center'}}>
-              <div style={{display: 'table-cell', height: '75%', verticalAlign: 'middle'}}>
-                <Button id="btnShow" style={{display: 'inline-block', opacity: '0', pointerEvents: 'none'}} ref={ (btnResults) => this.btnResults = btnResults} onClick={(e) => this.ShowAnswers(e)}>Show Answers</Button>
-                <Button id="btnBack" style={{display: 'inline-block', opacity: '0', pointerEvents: 'none', position: 'absolute', left: '10px' }} ref={ (btnResults) => this.btnResults = btnResults} onClick={(e) => this.MoveQuestions(e, 'back')}>Back</Button>
-                <Button id="btnNext" style={{display: 'inline-block', opacity: '0', pointerEvents: 'none', position: 'absolute', right: '10px', backgroundColor: '#cccccc', pointerEvents: 'none'}} ref={ (btnResults) => this.btnResults = btnResults} onClick={(e) => this.MoveQuestions(e, 'next')}>Next</Button>
+              <div style={{display: 'table-cell', height: '75%', verticalAlign: 'middle'}}>                  
+                <Button id="btnShow" style={{display: 'inline-block', opacity: '0'}} ref={ (btnResults) => this.btnResults = btnResults} onClick={(e) => this.ShowAnswers(e)}>Show Answers</Button>
+                <Button id="btnBack" style={{display: 'inline-block', opacity: '0', position: 'absolute', left: '10px' }} ref={ (btnResults) => this.btnResults = btnResults} onClick={(e) => this.MoveQuestions(e, 'back')}>Back</Button>
+                <Button id="btnNext" style={{display: 'inline-block', opacity: '0', position: 'absolute', right: '10px', backgroundColor: '#cccccc', pointerEvents: 'none'}} ref={ (btnResults) => this.btnResults = btnResults} onClick={(e) => this.MoveQuestions(e, 'next')}>Next</Button>
               </div>
             </div> 
             </div>
@@ -694,4 +696,4 @@ class ToolInvestmentQuiz extends Component {
   }
 }
 
-export default ToolInvestmentQuiz;
+export default ToolInvestmentQuiz2;
