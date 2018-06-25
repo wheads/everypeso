@@ -69,6 +69,10 @@ const BigButton = styled(Link)`
     max-width: 350px;
     padding: 10px 10px;
   }
+  
+  &:hover {
+    opacity: 0.9;
+  }
 `;
 
 const Button = styled(Link)`
@@ -86,6 +90,11 @@ const Button = styled(Link)`
   min-width: 200px;
   max-width: 280px;
   font-size: calc(0.75vw + 0.75vh + .5vmin);
+
+  &:hover {
+    opacity: 0.9;
+    background-color: red;
+  }
 
   @media (max-width: 768px) {    
     font-size: calc(1vw + 1vh + .5vmin);
@@ -340,9 +349,9 @@ class ToolInvestmentQuiz extends Component {
   /**
    * Add event listener
    */
-  UNSAFE_componentWillMount() {
-    this.updateDimensions();
-  }
+  //UNSAFE_componentWillMount() {
+  //  this.updateDimensions();
+  //}
 
   /**
    * Add event listener
@@ -361,7 +370,6 @@ class ToolInvestmentQuiz extends Component {
   }  
 
   updateDimensions() {
-    console.log('resize');
     var container = this.divContainer;
     var mainContainer = this.divMainContainer;
     if(mainContainer !== undefined)
@@ -423,9 +431,9 @@ class ToolInvestmentQuiz extends Component {
     this.setState({index: 0, status: 'done'});
   }
 
-  StartQuiz()
+  StartQuiz(e)
   { 
-    //e.preventDefault();
+    e.preventDefault();
     transition(
       select('#divStartInfo')
           .transition()
@@ -597,8 +605,6 @@ class ToolInvestmentQuiz extends Component {
       var correctOption = null;
       for(var j = 0; j < this.state.questions[i].options.length; j++)
       {
-        //var option = document.getElementById('rd' + this.state.questions[i].number + this.state.questions[i].options[j].value);
-        //var img2 = document.getElementById('rdimg' + this.state.questions[i].number + this.state.questions[i].options[j].value);
          
         var option = select('#rd' + this.state.questions[i].number + this.state.questions[i].options[j].value);
         var img = select('#rdimg' + this.state.questions[i].number + this.state.questions[i].options[j].value);
@@ -634,7 +640,6 @@ class ToolInvestmentQuiz extends Component {
           }
         }
       }
-      //var detail = document.getElementById("detail" + this.state.questions[i].number).style.display = 'block';
       select("#detail" + this.state.questions[i].number).style('opacity','1');
       if(correctOption !== null)
         correctOption.checked = true;

@@ -5,7 +5,19 @@ import PageLayout from '../../components/layouts/PageLayout'
 import HeroInvestQuizPage from '../../components/banners/HeroInvestQuizPage'
 
 const ToolContainer = styled.div`
-  display: block;
+  display: grid;
+  grid-template-columns: 65% 35%;
+
+  @media (max-width: 1111px) {
+    display: block;
+  }
+`;
+
+const IFrameContainer = styled.iframe`
+  width: 100%;
+  height: 356px;
+  border: none;
+  background-color: #FFFFFF;
 `;
 
 class App extends React.Component {
@@ -37,6 +49,7 @@ class App extends React.Component {
     return(
     <ToolContainer >
       <ToolInvestmentQuiz onClick={e => this.onClick(e)} />
+      <IFrameContainer src="https://4374kf.imgcorp.com/register/" />
     </ToolContainer>);
   }
 }
